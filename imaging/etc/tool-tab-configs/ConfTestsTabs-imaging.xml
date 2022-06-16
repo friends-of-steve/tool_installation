@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Notes:
+
+ConfTests, the prefix of this configuration file, is the ToolId as defined in ToolLauncher. Each Tool gets its own copy of the Tabs.xml configuration file.
+Sort order of the Conformance Tool's Tabs is defined by order of Tab elements in this file.
+
+Tab attributes:
+
+label:
+Permanent labels:
+	"Actors"
+	"Profiles"
+	"Options"
+Temporary labels:
+	At the actor level, the Tab Label attribute value is for tab organization purposes only. Before this Tab file was introduced,
+	the value of testkit\actorcollections\[tcCode].txt is used as the tab name. To preserve this feature,
+	the actor label is reset to the value that of the text file.
+	See "tabConfig.setLabel(tcd.getCollectionTitle());".
+
+type:
+Defines the tab type and correlates to a permanent label.
+
+tcCode:
+tcCode is a TestCollectionCode that is an ordered list specified as: actor(profile)_option.
+	Collections.txt naming convention:
+	Actor is required.
+	However, both the Profile and the Option are optional elements. If any of the optional elements are specified, such as Profile or Option, they need to be annotated with a parenthesis or an underscore, respectively.
+	An easy way to remember the order of the elements is the natural Conformance Tool UI Tab selection order: first Actor, second Profile, last Option.
+	See this page for more details: https://github.com/usnistgov/iheos-toolkit2/wiki/Test-collections-and-Conformance-tool-tabs
+Only the element that is relevant to the Tab level needs to be provided in the tcCode attribute value. Only the value, without any parenthesis or underscore, is used in tcCode.
+The collections.txt file indexes tests to the tab that matches the test collection code.
+You must have a matching entry in IheItiProfile enum class and OptionType enum class.
+
+displayColorCode:
+The RGB hex value for the tab color in the main Conformance Overview Page.
+
+externalStart:
+Vendor initiates first message of test. If externalStart is True, two Conformance Test Tool UI elements are different.
+Test Validation method and SUT selection.
+a) In the Test Bar, a Validation icon is used instead of the regular Run button.
+(The Run button is at both the Test Bar level and the Section levels.) In contrast, a Validation icon only appears at the Test Bar.
+Furthermore, no Sections can be run independently.
+But not all actors configured in this configuration file follow this
+attribute strictly because the flexibility of running a Section is needed.
+One example is IIG actor. Hence, usage of externalStart is only a suggestion and for the beginner this may be confusing.
+b) SUT selection is not required when externalStart is True. Either "null" or None will displayed in the SUT Test Context.
+
+ConformanceTestTab Actor Tab click event handler registrations:
+See ActorSelectionHandler for the Actor tab click event handler.
+	testCollectionDefinitionDAOs contains test collections for a given actor.
+-->
+
+<!--
+TODO:
+The "tabs" element adds extra layer which is not necessary. It can be removed but all the code that uses it needs to be updated.
+-->
+
+<tabs label="Actors">
+
+	<tab label="Imaging Document Consumer" type="actor" tcCode="idc" displayColorCode="#a6ffd0">
+		<tabs label="Profiles">
+			<tab label="XDS-I" type="profile" tcCode="xds-i">
+				<tabs label="Options">
+					<tab label="Required"  type="option" tcCode="" externalStart="false"/>
+				</tabs>
+			</tab>
+		</tabs>
+	</tab>
+
+	<tab label="Imaging Document Source" type="actor" tcCode="ids" displayColorCode="#a6ffd0">
+		<tabs label="Profiles">
+			<tab label="XDS-I" type="profile" tcCode="xds-i">
+				<tabs label="Options">
+					<tab label="Required"  type="option" tcCode="" externalStart="false"/>
+				</tabs>
+			</tab>
+		</tabs>
+	</tab>
+
+	<tab label="Initiating Imaging Gateway" type="actor" tcCode="iig" displayColorCode="#f8eefd">
+		<tabs label="Profiles">
+			<tab label="XCA-I" type="profile" tcCode="xca-i">
+				<tabs label="Options">
+					<tab label="Required"  type="option" tcCode="" externalStart="false"/>
+				</tabs>
+			</tab>
+		</tabs>
+	</tab>
+
+	<tab label="Responding Imaging Gateway" type="actor" tcCode="rig" displayColorCode="#f8eefd">
+		<tabs label="Profiles">
+			<tab label="XCA-I" type="profile" tcCode="xca-i">
+				<tabs label="Options">
+					<tab label="Required" type="option" tcCode="" externalStart="false"/>
+				</tabs>
+			</tab>
+		</tabs>
+	</tab>
+
+</tabs>
+
